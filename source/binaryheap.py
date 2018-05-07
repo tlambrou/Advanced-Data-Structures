@@ -33,7 +33,7 @@ class BinaryMinHeap(object):
     def insert(self, item):
         """Insert the given item into this heap.
         Best case running time: O(1) if item is max
-        Worst case running time: O(n*log(n)) if item is the min"""
+        Worst case running time: O(log(n)) if item is the min"""
         # Insert the item at the end and bubble up to the root
         self.items.append(item)
         if self.size() > 1:
@@ -49,8 +49,8 @@ class BinaryMinHeap(object):
 
     def delete_min(self):
         """Remove and return the minimum item at the root of this heap.
-        Best case running time: O(n*log(n)) no matter what
-        Worst case running time: O(n*log(n)) no matter what"""
+        Best case running time: O(log(n)) no matter what
+        Worst case running time: O(log(n)) no matter what"""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         elif self.size() == 1:
@@ -69,8 +69,8 @@ class BinaryMinHeap(object):
         """Remove and return the minimum item at the root of this heap,
         and insert the given item into this heap.
         This method is more efficient than calling delete_min and then insert.
-        Best case running time: O(n*log(n)) no matter what
-        Worst case running time: O(n*log(n)) no matter what"""
+        Best case running time: O(log(n)) no matter what
+        Worst case running time: O(log(n)) no matter what"""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         assert self.size() > 0
@@ -96,10 +96,11 @@ class BinaryMinHeap(object):
         # Get the parent's index and value
         parent_index = self._parent_index(index)
         parent_item = self.items[parent_index]
-        # TODO: Swap this item with parent item if values are out of order
-        # ...
-        # TODO: Recursively bubble up again if necessary
-        # ...
+        # Swap this item with parent item if values are out of order
+        if (item > parent_item):
+            self.items[index],  self.items[parent_index] =  self.items[parent_index], self.items[index]
+        # Recursively bubble up again if necessary
+        self._bubble_up(parent_index)
 
     def _bubble_down(self, index):
         """Ensure the heap ordering property is true below the given index,
