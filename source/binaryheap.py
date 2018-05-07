@@ -32,8 +32,8 @@ class BinaryMinHeap(object):
 
     def insert(self, item):
         """Insert the given item into this heap.
-        Best case running time: O(n) if item is min
-        Worst case running time: O(n*log(n)) if item is the max"""
+        Best case running time: O(1) if item is max
+        Worst case running time: O(n*log(n)) if item is the min"""
         # Insert the item at the end and bubble up to the root
         self.items.append(item)
         if self.size() > 1:
@@ -49,8 +49,8 @@ class BinaryMinHeap(object):
 
     def delete_min(self):
         """Remove and return the minimum item at the root of this heap.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(n*log(n)) no matter what
+        Worst case running time: O(n*log(n)) no matter what"""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         elif self.size() == 1:
