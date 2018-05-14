@@ -123,14 +123,17 @@ class BinaryMinHeap(object):
         right_item = self.items[right_index]
         if left_item < right_item:
             child_index = left_index
-        elif right_item >= left_item:
+        elif left_item >= right_item:
             child_index = right_index
         # Swap this item with a child item if values are out of order
         child_item = self.items[child_index]
-        self.items[child_index], self.items[index] = self.items[index], self.items[child_index]
-        # ...
+        bubbled = False
+        if item > child_item:
+            bubbled = True
+            self.items[child_index], self.items[index] = self.items[index], self.items[child_index]
         # Recursively bubble down again if necessary
-        self._bubble_down(child_index)
+        if bubbled is True:
+            self._bubble_down(index)
 
     def _last_index(self):
         """Return the last valid index in the underlying array of items."""
